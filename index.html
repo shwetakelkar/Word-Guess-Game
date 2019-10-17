@@ -18,11 +18,11 @@
             </div>
             <div class ="col-md-6">
                 <br>
-                <h4>Press any key to start the game</h4><br>
+                <h3>Press any key to start the game</h3><br>
                 <h4>Wins: <span id="winText"></span></h4><br>
                 <h4>Correct word <br></h4>
-                <h4><br><span id ="letters" style="text-decoration-line:underline;"></span></h4><br>
-                <h4>Number of Guesses remaining<br> <span id= "guessRemain"></span></h4><br>
+                <h4><br><span id ="letters"></span></h4><br>
+                <h4>Number of Guesses remaining<br><span id= "guessRemain"></span></h4><br>
                 <h4>Letter already guessed<br> <span id = "letterguessed"></span></h4><br>
 
             </div>    
@@ -32,7 +32,13 @@
     </div>
 
     <script>
-
+        /*
+        -----------------------------------
+        calling the function to update the UI
+        with user inputs
+        ----------------------------------
+        initializing the global variables
+        */
         var currentWord = ['s', 'l', 'a', 'c','k'];
 
         var winNum = 0;
@@ -41,48 +47,46 @@
 
         var wholeLetterArr=[" _ "," _ "," _ "," _ "," _ "];
 
-        document.getElementById("letters").textContent = wholeLetterArr;
+        //initializing the display
 
+        document.getElementById("letters").textContent = wholeLetterArr;
         document.getElementById("guessRemain").textContent = numGuessRemaining;
         document.getElementById("winText").textContent = winNum;
 
+        // calling onKey up function with java script
         document.onkeyup= function(event){
             
             var input = event.key;
 
             input = input.toLowerCase();
 
-            if(currentWord.indexOf(input) != -1){
+            var indexNum = currentWord.indexOf(input);
 
+            if(indexNum!= -1 ){
 
-                winNum++;
+                if(wholeLetterArr[indexNum]!=input){
+                        winNum++;
 
-                document.getElementById("winText").textContent=winNum;
-
-                for(var i=0; i<currentWord.length; i++)
-                {
-                    var j = currentWord.indexOf(input);
-
-                    wholeLetterArr[j] = input;
-
-                    console.log(wholeLetterArr);
-
-                }
+                        for(var i=0; i<currentWord.length; i++)
+                        {
+                            wholeLetterArr[indexNum] = input;
+                        }
                 
+                    }
             }
             else{
+                if(numGuessRemaining==1)
+                    numGuessRemaining = 15;
+                
                 numGuessRemaining--;
                 
                 (document.getElementById("letterguessed").textContent) += input+ ", ";
-                
             }
 
+            document.getElementById("winText").textContent=winNum;
             document.getElementById("letters").textContent = wholeLetterArr;
-            document.getElementById("guessRemain").textContent = numGuessRemaining;
-
-            
-
-        }
+            document.getElementById("guessRemain").textContent = numGuessRemaining;  
+         }
     
     </script>
     

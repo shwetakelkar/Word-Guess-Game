@@ -3,3 +3,7 @@ body{
     color: white;
     font-family: fantasy;
 }
+
+#letters{
+    text-decoration-line:underline;
+}
