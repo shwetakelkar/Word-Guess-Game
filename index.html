@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="assets/css/style.css" type="text/css" rel="stylesheet">
+    <title>Word_Guess_Game</title>
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <br>
+                <img src="assets/images/camera.jpg">
+            </div>
+            <div class ="col-md-6">
+                <br>
+                <h4>Press any key to start the game</h4><br>
+                <h4>Wins: <span id="winText"></span></h4><br>
+                <h4>Correct word <br></h4>
+                <h4><br><span id ="letters" style="text-decoration-line:underline;"></span></h4><br>
+                <h4>Number of Guesses remaining<br> <span id= "guessRemain"></span></h4>
+                <h4>Letter already guessed<br> <span id = "letterguessed"></span></h4>
+
+            </div>    
+            
+
+        </div>
+    </div>
+
+    <script>
+
+        var currentWord = ['s', 'l', 'a', 'c','k'];
+
+        var winNum = 0;
+
+        var numGuessRemaining = 15;
+
+        var wholeLetterArr=[" _ "," _ "," _ "," _ "," _ "];
+
+        document.getElementById("letters").textContent = wholeLetterArr;
+
+        document.getElementById("guessRemain").textContent = numGuessRemaining;
+        document.getElementById("winText").textContent = winNum;
+
+        document.onkeyup= function(event){
+            
+            var input = event.key;
+
+            input = input.toLowerCase();
+
+            if(currentWord.indexOf(input) != -1){
+
+
+                winNum++;
+
+                document.getElementById("winText").textContent=winNum;
+
+                for(var i=0; i<currentWord.length; i++)
+                {
+                    var j = currentWord.indexOf(input);
+
+                    wholeLetterArr[j] = input;
+
+                    console.log(wholeLetterArr);
+
+                }
+                
+            }
+            else{
+                numGuessRemaining--;
+                
+                (document.getElementById("letterguessed").textContent) += input+ ", ";
+                
+            }
+
+            document.getElementById("letters").textContent = wholeLetterArr;
+            document.getElementById("guessRemain").textContent = numGuessRemaining;
+
+            
+
+        }
+    
+    </script>
+    
+</body>
+</html>
